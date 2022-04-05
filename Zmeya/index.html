@@ -27,17 +27,19 @@
 
 <body>
     <!-- Рисуем игровое поле -->
-    <canvas width="400" height="400" id="game"></canvas>
+    <canvas width="1600" height="1000" id="game"></canvas>
 
     <h1><input type="button" value="Начать игру" id="next_Frame_Button"> </h1>
     <!-- Сам скрипт с игрой -->
     <script>
+        let gameWidth = document.getElementById('game').clientWidth;
+        let gameHeight = document.getElementById('game').clientHeight;
         // Поле, на котором всё будет происходить, — тоже как бы переменная
         var canvas = document.getElementById('game');
         // Классическая змейка — двухмерная, сделаем такую же
         var context = canvas.getContext('2d');
         // Размер одной клеточки на поле — 16 пикселей
-        var grid = 16;
+        var grid = 10;
         // Служебная переменная, которая отвечает за скорость змейки
         var count = 0;
         // А вот и сама змейка
@@ -114,8 +116,8 @@
                     snake.maxCells++;
                     // Рисуем новое яблочко
                     // Помним, что размер холста у нас 400x400, при этом он разбит на ячейки — 25 в каждую сторону
-                    apple.x = getRandomInt(0, 25) * grid;
-                    apple.y = getRandomInt(0, 25) * grid;
+                    apple.x = getRandomInt(0, gameWidth / grid) * grid;
+                    apple.y = getRandomInt(0, gameHeight / grid) * grid;
                 }
                 if (snake.x == apple.x && snake.y < apple.y) {
                     snake.dy = grid;
